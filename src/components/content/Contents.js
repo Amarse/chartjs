@@ -2,7 +2,7 @@ import './contents.css';
 import { React, useState } from 'react';
 
 function Contents() {
-  let [] = useState();
+  let [charts, getCharts] = useState();
 
   return (
     <section className="wrap">
