@@ -4,5 +4,7 @@
 }
 
 .main-content {
-  background-color: #fcfbfb;
+  display: block;
+  margin: 0 auto;
 }
+
