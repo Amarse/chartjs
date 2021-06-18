@@ -43,7 +43,6 @@ function Contents() {
         }
         return acc;
       }, []);
-      const data = arr.map((i) => i.confirmed);
       const labels = arr.map((i) => `${i.month + 1} 월`);
       setConfirmedDate({
         labels,
@@ -51,7 +50,7 @@ function Contents() {
           {
             label: '국내 누적 확진자',
             backgroundColor: 'salmon',
-            data,
+            data: arr.map((i) => i.confirmed),
             fill: true,
           },
         ],
