@@ -1,19 +1,23 @@
 import './contents.css';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Bar } from 'react-chartjs-2';
+import { Bar, Line, Doughnut } from 'react-chartjs-2';
 
 function Contents() {
-  const [confirmedData, setConfirmedDate] = useState({});
+  const [confirmedData, setConfirmedData] = useState({});
+  const [quarantinedData, setQuarantinedData] = useState({});
+  const [comparedData, setComparedData] = useState({});
+
   //컴포넌트가 마운트가 됐을때(처음 실행) 바로 매소드를 실행 할 수 있게 하기 위해 useEffect 사용.
   useEffect(() => {
     const fetchEvents = async () => {
       const res = await axios.get(
-        'https://api.covid19api.com/dayone/country/kr'
+        'https://api.covid19api.com/total/dayone/country/kr'
       );
       getData(res.data);
-      console.log(res.data);
+      //console.log(res.data);
     };
+
     const getData = (items) => {
       const arr = items.reduce((acc, cur) => {
         const currentDate = new Date(cur.Date);
@@ -35,16 +39,17 @@ function Contents() {
         if (findItem && findItem.date < date) {
           findItem.year = year;
           findItem.month = month;
-          findItem.date = date;
           findItem.active = active;
+          findItem.date = date;
           findItem.confirmed = confirmed;
           findItem.death = death;
           findItem.recovered = recovered;
         }
         return acc;
       }, []);
+
       const labels = arr.map((i) => `${i.month + 1} 월`);
-      setConfirmedDate({
+      setConfirmedData({
         labels,
         datasets: [
           {
@@ -55,29 +60,78 @@ function Contents() {
           },
         ],
       });
+      setQuarantinedData({
+        labels,
+        datasets: [
+          {
+            label: '월별 격리자',
+            backgroundColor: 'tomato',
+            borderColor: 'tomato',
+            data: arr.map((i) => i.active),
+          },
+        ],
+      });
+      const last = arr[arr.length - 1]; //마지막 인덱스만 가져온다.
+      setComparedData({
+        labels: ['확진자', '격리해제', '사망'],
+        datasets: [
+          {
+            label: '누적 확인, 해체, 사망',
+            borderColor: ['#32adec', '#16c26c', '#ffbc36'],
+            backgroundColor: ['#32adec', '#16c26c', '#ffbc36'],
+            data: [last.confirmed, last.recovered, last.death],
+          },
+        ],
+      });
       console.log(arr);
     };
-    // console.log(itemArray);
-    // items.forEach((item) => console.log(item));
 
     fetchEvents();
-  });
+  }, []);
   return (
     <section className="wrap">
       {/* <h3 className="tab-title">국내 코로나 현황</h3> */}
       <div className="main-content">
-        <Bar
-          data={confirmedData}
+        <div className="bar-gra">
+          <Bar
+            data={confirmedData}
+            options={
+              ({
+                titile: {
+                  display: true,
+                  text: '누적 확진자 추이',
+                  fontsize: 16,
+                },
+              },
+              { legend: { display: true, position: 'bottom' } })
+            }
+          />
+        </div>
+        <Line
+          data={quarantinedData}
           options={
             ({
-              title: { display: true, text: '누적 확진자 추이', fontSize: 16 },
-            },
-            {
-              legend: {
+              titile: {
                 display: true,
-                position: 'bottom',
+                text: '월별 격려자 현황',
+                fontsize: 16,
               },
-            })
+            },
+            { legend: { display: true, position: 'bottom' } })
+          }
+        />
+
+        <Doughnut
+          data={comparedData}
+          options={
+            ({
+              titile: {
+                display: true,
+                text: `누적 확진, 해제, 사망 (${new Date().getMonth() + 1}월`,
+                fontsize: 16,
+              },
+            },
+            { legend: { display: true, position: 'bottom' } })
           }
         />
       </div>
