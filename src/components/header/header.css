@@ -19,6 +19,15 @@
 .tab-area .item {
  font-size: 2em;
  padding:  1em 2em ;
- border-bottom: 2px solid #434343 ;
+ color: #616161;
+ cursor: pointer;
+ 
 }
 
+.tab-area .item:hover {
+  color: #00c765;
+  border-bottom: 2px solid #434343;
+}
+.tab-area .item:active {
+  color: #00c765;
+}

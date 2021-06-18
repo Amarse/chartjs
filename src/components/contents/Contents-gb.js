@@ -1,12 +1,11 @@
 import './contents.css';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Bar, Line, Doughnut } from 'react-chartjs-2';
+import { Bar, Line } from 'react-chartjs-2';
 
-function Contents() {
+function ContentsGb() {
   const [confirmedData, setConfirmedData] = useState({});
   const [quarantinedData, setQuarantinedData] = useState({});
-  const [comparedData, setComparedData] = useState({});
 
   //컴포넌트가 마운트가 됐을때(처음 실행) 바로 매소드를 실행 할 수 있게 하기 위해 useEffect 사용.
   useEffect(() => {
@@ -54,7 +53,8 @@ function Contents() {
         datasets: [
           {
             label: '국내 누적 확진자',
-            backgroundColor: 'salmon',
+            borderColor: '#32adec',
+            backgroundColor: '#32adec',
             data: arr.map((i) => i.confirmed),
             fill: true,
           },
@@ -65,24 +65,13 @@ function Contents() {
         datasets: [
           {
             label: '월별 격리자',
-            backgroundColor: 'tomato',
-            borderColor: 'tomato',
+            backgroundColor: '#f23e29',
+            borderColor: '#f23e29',
             data: arr.map((i) => i.active),
           },
         ],
       });
-      const last = arr[arr.length - 1]; //마지막 인덱스만 가져온다.
-      setComparedData({
-        labels: ['확진자', '격리해제', '사망'],
-        datasets: [
-          {
-            label: '누적 확인, 해체, 사망',
-            borderColor: ['#32adec', '#16c26c', '#ffbc36'],
-            backgroundColor: ['#32adec', '#16c26c', '#ffbc36'],
-            data: [last.confirmed, last.recovered, last.death],
-          },
-        ],
-      });
+
       console.log(arr);
     };
 
@@ -120,23 +109,9 @@ function Contents() {
             { legend: { display: true, position: 'bottom' } })
           }
         />
-
-        <Doughnut
-          data={comparedData}
-          options={
-            ({
-              titile: {
-                display: true,
-                text: `누적 확진, 해제, 사망 (${new Date().getMonth() + 1}월`,
-                fontsize: 16,
-              },
-            },
-            { legend: { display: true, position: 'bottom' } })
-          }
-        />
       </div>
     </section>
   );
 }
 
-export default Contents;
+export default ContentsGb;

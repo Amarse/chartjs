@@ -1,2 +1,3 @@
 export { default as Header } from './header/Header';
-export { default as Contents } from './contents/Contents';
+export { default as ContentsKr } from './contents/Contents-kr';
+export { default as ContentsGb } from './contents/Contents-gb';
