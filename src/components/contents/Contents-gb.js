@@ -11,7 +11,7 @@ function ContentsGb() {
   useEffect(() => {
     const fetchEvents = async () => {
       const res = await axios.get(
-        'https://api.covid19api.com/total/dayone/country/kr'
+        'https://api.covid19api.com/total/dayone/country/gb'
       );
       getData(res.data);
       //console.log(res.data);
@@ -52,7 +52,7 @@ function ContentsGb() {
         labels,
         datasets: [
           {
-            label: '국내 누적 확진자',
+            label: '해외 누적 확진자',
             borderColor: '#32adec',
             backgroundColor: '#32adec',
             data: arr.map((i) => i.confirmed),
