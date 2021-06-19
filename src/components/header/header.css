@@ -35,8 +35,3 @@ input[type="radio"] {
   color: #00c765;
   border-bottom: 2px solid #00c765;
 }
-
-.item:focus:active {
-  color: #00c765;
-  border-bottom: 2px solid #00c765;
-}
