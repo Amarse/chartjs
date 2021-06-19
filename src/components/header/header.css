@@ -15,6 +15,7 @@
 
 .tab-area {
   display: flex;
+  margin-bottom: 20px;
 }
 .tab-area .item {
  font-size: 2em;
@@ -23,11 +24,19 @@
  cursor: pointer;
  
 }
-
-.tab-area .item:hover {
-  color: #00c765;
-  border-bottom: 2px solid #434343;
+input[type="radio"] {
+  display: none;  
 }
-.tab-area .item:active {
+.item:hover {
   color: #00c765;
+}
+
+.item:focus {
+  color: #00c765;
+  border-bottom: 2px solid #00c765;
+}
+
+.item:focus:active {
+  color: #00c765;
+  border-bottom: 2px solid #00c765;
 }

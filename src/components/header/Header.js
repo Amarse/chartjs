@@ -13,10 +13,11 @@ function Header() {
   const onClickTab = (index) => {
     setActiveTab(index);
   };
+
   return (
     <section className="wrap">
       <header className="header">
-        <h1 className="header-title">코로나-19 바이러스 정말 싫으다!!!</h1>
+        <h1 className="header-title">코로나-19 바이러스 </h1>
       </header>
       <div className="tab-area">
         {tabTitle.map((title, index) => {
@@ -24,6 +25,7 @@ function Header() {
             <span
               className="item"
               key={index}
+              tabIndex="0"
               onClick={() => onClickTab(index)}
             >
               {title}

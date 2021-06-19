@@ -1,12 +1,11 @@
 import './contents.css';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Bar, Line, Doughnut } from 'react-chartjs-2';
+import { Bar, Line } from 'react-chartjs-2';
 
 function ContentsKr() {
   const [confirmedData, setConfirmedData] = useState({});
   const [quarantinedData, setQuarantinedData] = useState({});
-  const [comparedData, setComparedData] = useState({});
 
   //컴포넌트가 마운트가 됐을때(처음 실행) 바로 매소드를 실행 할 수 있게 하기 위해 useEffect 사용.
   useEffect(() => {
