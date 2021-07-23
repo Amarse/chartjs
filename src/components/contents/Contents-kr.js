@@ -91,7 +91,6 @@ function ContentsKr() {
   }, []);
   return (
     <section className="wrap">
-      {/* <h3 className="tab-title">국내 코로나 현황</h3> */}
       <div className="main-content">
         <div className="bar-gra">
           <Bar
